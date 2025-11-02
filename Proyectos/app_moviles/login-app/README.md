@@ -6,7 +6,8 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 
 ## Repositorio
 
-[https://github.com/MagikarpSama/login_app.git](https://github.com/MagikarpSama/login_app.git)
+[https://github.com/MagikarpSama/login_app.git]
+
 
 ## Características
 - Pantalla de Login con campos de Email y Password (modo seguro).
