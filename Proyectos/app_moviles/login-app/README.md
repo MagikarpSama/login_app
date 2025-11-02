@@ -55,7 +55,7 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 
 ## Video demostrativo
 
-[Enlace a video de funcionamiento](https://www.loom.com/ o https://www.youtube.com/)
+https://youtu.be/rP9WHtU8x18
 
 ---
 
