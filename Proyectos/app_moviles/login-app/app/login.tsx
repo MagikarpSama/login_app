@@ -1,26 +1,43 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { useAuth } from './auth-context'
+import { useAuth } from '../context/auth-context'
 
 const LoginScreen: React.FC = () => {
   const [emailInput, setEmailInput] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState(false)
   const router = useRouter()
   const { setEmail } = useAuth()
+  const [showPassword, setShowPassword] = useState(false)
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    if (!emailInput.trim()) {
+      setError('Debes ingresar un correo electrónico válido')
+      setSuccess(false)
+      return
+    }
+    // Validación básica de formato de email
+    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
+    if (!emailRegex.test(emailInput)) {
+      setError('Formato de correo electrónico inválido')
+      setSuccess(false)
+      return
+    }
     if (password !== '1234') {
       setError('Contraseña incorrecta')
+      setSuccess(false)
       return
     }
     setError('')
+    setSuccess(true)
     setEmail(emailInput)
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('email', emailInput)
-    }
-    router.replace('/(tabs)/profile')
+    await AsyncStorage.setItem('email', emailInput)
+    setTimeout(() => {
+      router.push('/(tabs)/profile')
+    }, 1200)
   }
 
   return (
@@ -41,10 +58,14 @@ const LoginScreen: React.FC = () => {
           placeholder="Password"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
+          secureTextEntry={!showPassword}
           placeholderTextColor="#888"
         />
+        <TouchableOpacity style={styles.toggle} onPress={() => setShowPassword((v) => !v)}>
+          <Text style={styles.toggleText}>{showPassword ? 'Ocultar' : 'Mostrar'} contraseña</Text>
+        </TouchableOpacity>
         {error ? <Text style={styles.error}>{error}</Text> : null}
+        {success ? <Text style={styles.success}>¡Inicio de sesión exitoso!</Text> : null}
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>INGRESAR</Text>
         </TouchableOpacity>
@@ -108,6 +129,22 @@ const styles = StyleSheet.create({
     color: '#d32f2f',
     marginBottom: 8,
     textAlign: 'center',
+  },
+  success: {
+    color: '#388e3c',
+    marginBottom: 8,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  toggle: {
+    alignSelf: 'flex-end',
+    marginBottom: 8,
+    padding: 4,
+  },
+  toggleText: {
+    color: '#1976d2',
+    fontSize: 14,
   },
 })
 

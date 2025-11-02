@@ -10,7 +10,7 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 
 ## Características
 - Pantalla de Login con campos de Email y Password (modo seguro).
-- Validación de correo electrónico: solo permite emails válidos.
+- Validación de correo electrónico: solo permite emails válidos (ejemplo@ejemplo.tal).
 - Validación de contraseña: solo permite “1234”.
 - Botón para mostrar/ocultar contraseña.
 - Navegación con Expo Router.
@@ -44,7 +44,7 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 ## Funcionamiento
 
 - Al abrir la app, verás la pantalla de Login.
-- Ingresa tu email y la contraseña “1234”.
+- Ingresa un email cualquiera y la contraseña “1234”.
 - Si el email está vacío o el formato es incorrecto, verás un mensaje de error.
 - Si la contraseña es incorrecta, verás el mensaje “Contraseña incorrecta”.
 - Si es correcta, accederás a la vista principal con Tabs:
@@ -59,4 +59,5 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 
 ---
 
-**Autor:** Daniel
+**Autor:** Daniel Ignacio Romero Zapata
+

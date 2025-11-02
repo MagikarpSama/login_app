@@ -1,17 +1,21 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useRouter } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
-import { useAuth } from '../auth-context'
+import { useAuth } from '../../context/auth-context'
 
 const ProfileScreen: React.FC = () => {
   const { email, setEmail } = useAuth()
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedEmail = window.localStorage.getItem('email')
+    const fetchEmail = async () => {
+      const storedEmail = await AsyncStorage.getItem('email')
       if (storedEmail) setEmail(storedEmail)
       setLoading(false)
     }
+    fetchEmail()
   }, [setEmail])
 
   if (loading) {
@@ -27,18 +31,12 @@ const ProfileScreen: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Perfil</Text>
       <Text style={styles.label}>Email:</Text>
-      <Text style={styles.email}>{email || 'No disponible'}</Text>
-      <Button
-        title="Cerrar sesión"
-        color="#d32f2f"
-        onPress={() => {
-          setEmail('')
-          if (typeof window !== 'undefined') {
-            window.localStorage.removeItem('email')
-          }
-          window.location.href = '/login'
-        }}
-      />
+      <Text style={styles.email}>{email}</Text>
+      <Button title="Cerrar sesión" onPress={async () => {
+        setEmail('')
+        await AsyncStorage.removeItem('email')
+        router.replace('/login')
+      }} />
     </View>
   )
 }

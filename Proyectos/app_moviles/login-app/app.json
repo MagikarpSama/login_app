@@ -1,7 +1,7 @@
 {
   "expo": {
-  "name": "login-app",
-  "slug": "login-app",
+    "name": "login-app",
+    "slug": "login-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.loginapp"
     },
     "web": {
       "output": "static",
