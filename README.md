@@ -15,7 +15,15 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 - Validación de contraseña: solo permite “1234”.
 - Botón para mostrar/ocultar contraseña.
 - Navegación con Expo Router.
-- Vista principal con Tabs: Home (bienvenida) y Perfil (muestra el email).
+- Vista principal con Tabs: Home (bienvenida), Perfil (muestra el email) y TODO List.
+- TODO List:
+   - Crear tareas con título, foto y localización actual (se muestra un mapa con la ubicación).
+   - Eliminar tareas creadas.
+   - Marcar tareas como completadas o no completadas.
+   - Las tareas están asociadas al usuario logueado y solo son visibles para ese usuario.
+   - Las tareas se guardan en persistencia local usando AsyncStorage.
+   - Las fotos se guardan en el sistema de archivos local del dispositivo.
+   - Compatible con emulador, dispositivo físico y web.
 - Manejo de estado con React Hooks (`useState`, `useEffect`).
 - Botón de cerrar sesión en Perfil (usa router.replace para evitar retroceso).
 - Código ordenado y buenas prácticas de TypeScript y React.
@@ -56,7 +64,8 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 
 ## Video demostrativo
 
-https://youtu.be/rP9WHtU8x18
+https://youtu.be/rP9WHtU8x18 Login
+https://www.youtube.com/shorts/eCyRQDQ0IJs TODO list
 
 ---
 
