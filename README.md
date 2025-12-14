@@ -11,18 +11,18 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 
 ## Características
 - Pantalla de Login con campos de Email y Password (modo seguro).
-- Validación de correo electrónico: solo permite emails válidos (ejemplo@ejemplo.tal).
-- Validación de contraseña: solo permite “1234”.
+- Validación de correo electrónico: permite cualquier email válido.
+- Validación de contraseña: solo permite “password123”.
 - Botón para mostrar/ocultar contraseña.
 - Navegación con Expo Router.
 - Vista principal con Tabs: Home (bienvenida), Perfil (muestra el email) y TODO List.
-- TODO List:
+ - TODO List:
    - Crear tareas con título, foto y localización actual (se muestra un mapa con la ubicación).
+   - Editar tareas existentes (título, foto, localización) desde un modal.
    - Eliminar tareas creadas.
-   - Marcar tareas como completadas o no completadas.
+   - Marcar tareas como completadas o no completadas (toggle con PUT al backend).
    - Las tareas están asociadas al usuario logueado y solo son visibles para ese usuario.
-   - Las tareas se guardan en persistencia local usando AsyncStorage.
-   - Las fotos se guardan en el sistema de archivos local del dispositivo.
+   - Las tareas se sincronizan con el backend y se actualizan en tiempo real en la app.
    - Compatible con emulador, dispositivo físico y web.
 - Manejo de estado con React Hooks (`useState`, `useEffect`).
 - Botón de cerrar sesión en Perfil (usa router.replace para evitar retroceso).
@@ -53,14 +53,25 @@ Esta aplicación móvil está desarrollada con **React Native** y **Expo**, util
 ## Funcionamiento
 
 - Al abrir la app, verás la pantalla de Login.
-- Ingresa un email cualquiera y la contraseña “1234”.
+- Ingresa un email cualquiera y la contraseña “password123”.
 - Si el email está vacío o el formato es incorrecto, verás un mensaje de error.
 - Si la contraseña es incorrecta, verás el mensaje “Contraseña incorrecta”.
 - Si es correcta, accederás a la vista principal con Tabs:
-  - **Home:** muestra un mensaje de bienvenida.
-  - **Perfil:** muestra el email ingresado.
-- En Perfil puedes cerrar sesión con el botón “Cerrar sesión”, lo que te regresa al Login y limpia el historial.
-- Puedes mostrar/ocultar la contraseña con el botón correspondiente.
+   - **Home:** muestra un mensaje de bienvenida.
+   - **Perfil:** muestra el email ingresado y permite cerrar sesión.
+   - **TODO List:**
+      - Puedes crear nuevas tareas con título, foto y localización.
+      - Puedes editar cualquier tarea existente tocando el ícono ✏️ (se abre un modal con el formulario editable).
+      - Puedes marcar una tarea como completada o no con el botón de check/círculo (se actualiza en el backend).
+      - Puedes eliminar tareas con el ícono de papelera.
+      - Todos los cambios se reflejan en tiempo real y se sincronizan con el backend.
+      - Solo ves tus propias tareas.
+
+## Integración backend
+
+- Todas las operaciones de tareas (crear, editar, eliminar, toggle) usan endpoints REST protegidos con JWT.
+- El login y registro usan endpoints `/auth`.
+- Las imágenes se suben a `/images` y se referencian por URL en las tareas.
 
 ## Video demostrativo
 

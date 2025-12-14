@@ -35,7 +35,7 @@ const ProfileScreen: React.FC = () => {
       <Button title="Cerrar sesión" onPress={async () => {
         setEmail('')
         await AsyncStorage.removeItem('email')
-        router.replace('/login')
+        router.replace('/login-screen')
       }} />
     </View>
   )

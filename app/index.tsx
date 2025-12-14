@@ -1,7 +1,6 @@
-import { Redirect } from 'expo-router'
+import AuthLoadingScreen from './auth-loading-screen';
 
 
-// Solo muestra LoginScreen al inicio
 export default function Index() {
-  return <Redirect href="/login" />
+  return <AuthLoadingScreen />;
 }
